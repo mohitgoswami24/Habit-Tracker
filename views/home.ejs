@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="/css/home.css">
+ 
+ <!-- header  -->
+<%- include('_header'); %>
+
+<div class="home-container">
+    
+    <% if(locals.habits.length==0) { %>
+        <%= habits %>
+        <div id="noHabitText"></div>
+    
+         <div class="form-popup-1" id="myForm">
+            <form action="/habit/create-habit" id="createHabit" method="POST" class="form-container">
+                <input type="text" name="title" placeholder="Title" required>
+                <input type="text" name="desc" placeholder="Description">
+                <button type="submit" id="save-btn">Add Habit</button>
+            </form>
+        </div>
+    <% } else { %>
+        <div>
+            <div>
+                
+                <!-- weekly view -->
+                <%- include('weekly_view'); %>
+                
+                <!-- daily view  -->
+                <%- include('daily_view'); %>
+
+            </div>
+
+
+            <!-- button to open add habit form  -->
+            <button id="open-btn" class="button-30" onclick="openForm()" > + Add Habit</button>
+            <div class="form-popup" id="myForm">
+                <form action="/habit/create-habit" id="createHabit" method="POST" class="form-container">
+                    <input type="text" name="title" placeholder="Enter habit title" required>
+                    <input type="text" name="desc" placeholder="Description">
+                    <button type="reset" id="cancel-btn" onclick="closeForm()">Cancel</button>
+                    <button type="submit" id="save-btn">Save</button>
+                </form>
+            </div>
+            <!-- button to toggle between daily/weekly view -->
+            <button id="change-view" class="button-30" onclick="changeView()" > Show Daily</button>
+        </div>
+    <% } %>
+</div>
+
+
+
+
+<!-- importing this script to open/close form -->
+<script src="/js/home.js">
